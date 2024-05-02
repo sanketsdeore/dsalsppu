@@ -50,6 +50,7 @@ class PriorityQ {
                 break;
             }
         }
+        cout << "\nPatient enqueued successfully!" << endl;
     }
     
     void dequeue () {
@@ -93,7 +94,7 @@ int main() {
             case 1:
                 cout << "\nEnter name: ";
                 cin >> name;
-                cout << "\nEnter type: ";
+                cout << "\nEnter type (0 - Serious, 1 - Non Serious, 2 - General Checkup): ";
                 cin >> type;
                 p.enqueue (name, static_cast<Type>(type));
                 break;
