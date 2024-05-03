@@ -1,163 +1,63 @@
 #include <iostream>
-
 using namespace std;
 
-class heap1{
+void minHeap (int arr[], int i) {
+    int parent = (i - 1) / 2;
+    int curr = i;
+    while (parent >= 0 && arr [parent] > arr [curr]) {
+        swap (arr [parent], arr [curr]);
+        curr = parent;
+        parent = (curr - 1) / 2;
+    }
+}
 
-public:
+void maxHeap (int arr[], int i) {
+    int parent = (i - 1) / 2;
+    int curr = i;
+    while (parent >= 0 && arr [parent] < arr [curr]) {
+        swap (arr [parent], arr [curr]);
+        curr = parent;
+        parent = (curr - 1) / 2;
+    }
+}
 
-
-
-void MAX_HEAPIFY(int a[], int i, int n)		//reheapdown- deleting element from top location
-
-{
-
-    int l,r,largest,loc;
-
-    l=2*i;
-
-    r=(2*i+1);
-
-    largest=i;
-
-    if((l<=n)&&a[l]>a[largest])
-
-       largest=l;
-
-    /*else
-
-       largest=i;*/
-
+int main() {
+    int n, j;
     
-
-    if((r<=n)&&(a[r]>a[largest]))
-
-       largest=r;
-
-   if(largest!=i)
-
-    {
-
-         loc=a[i];				//delet
-
-         a[i]=a[largest];
-
-         a[largest]=loc;
-
-         MAX_HEAPIFY(a, largest,n);
-
+    cout << "\nEnter no. of students: ";
+    cin >> n;
+    
+    int arr [n];
+    
+    for (j = 0; j < n; j ++) {
+        cout << "\nMarks of student " << j + 1 << ": ";
+        cin >> arr [j];
     }
-
-}
-
-void BUILD_MAX_HEAP(int a[], int n)
-
-{
-
-    for(int k = n/2; k >= 1; k--)
-
-    {
-
-        MAX_HEAPIFY(a, k, n);
-
+    
+    cout << "\nList of Marks: ";
+    for (j = 0; j < n; j ++) {
+        cout << arr [j] << " ";
     }
-
-}
-
-void HEAPSORT(int a[], int n)
-
-{
-
-
-
-    BUILD_MAX_HEAP(a,n);
-
-    int i, temp;
-
-    for (i = n; i >= 2; i--)
-
-    {
-
-        temp = a[i];				//delete maximum element from the root.
-
-        a[i] = a[1];
-
-        a[1] = temp;
-
-        MAX_HEAPIFY(a, 1, i - 1);
-
+    
+    for (j = 1; j < n; j ++) {
+        minHeap (arr, j);
     }
-
+    
+    cout << "\nList of Marks after Heapifying (Min): ";
+    for (j = 0; j < n; j ++) {
+        cout << arr [j] << " ";
+    }
+    
+    cout << "\nMinimum Marks: " << arr [0];
+    
+    for (j = 1; j < n; j ++) {
+        maxHeap(arr, j);
+    }
+    
+    cout << "\nList of Marks after Heapifying (Max): ";
+    for (j = 0; j < n; j ++) {
+        cout << arr [j] << " ";
+    }
+    
+    cout << "\nMaximum Marks: " << arr [0];
 }
-
-
-
-void accept(){
-
-		int n;
-
-	    cout<<"Enter total number of students"<<endl;
-
-	    cin>>n;
-
-	    int a[n];
-
-	    cout<<"Enter the marks of the students "<<endl;
-
-	    for (int i = 1; i <= n; i++)
-
-	    {
-
-	        cin>>a[i];
-
-	    }
-
-	    HEAPSORT(a, n);
-
-	    display(a,n);
-
-}
-
-void display(int a[],int n){
-
-
-
-	
-
-      cout<<":::::::SORTED MARKS::::::"<<endl;
-
-
-
-	    for (int i = 1; i <= n; i++)
-
-	    {
-
-	        cout<<a[i]<<endl;
-
-	    }
-
-	  
-
-	cout<<"Minimum marks obtained are:"<<a[1];
-
-	cout<<"\nMaximum marks obtained are:"<<a[n];
-
-
-
-}
-
-};
-
-int main()
-
-{
-
-   	heap1 h;
-
-	h.accept();
-
-	return 0;
-
-}
-
-
